@@ -42,6 +42,6 @@ class Three(Resource):
 
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Two, "/test/")
-api.add_resource(Three, "/test360/")
+api.add_resource(Three, "/test/360/")
 if __name__ == "__main__":
     app.run(debug=True)
