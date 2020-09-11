@@ -22,15 +22,26 @@ class One(Resource):
 class Two(Resource):
 
     def get(self):
-        
-        video = pafy.new(url)
-        best = video.getbest()
-        playurl = best.url
-        return {'id': str(playurl)}
-        #except:
-        #    return "Fail"
+        try:
+            video = pafy.new(url)
+            best = video.getbest()
+            playurl = best.url
+            return {'id': str(playurl)}
+        except:
+            return "Fail"
+class Three(Resource):
+
+    def get(self):
+        try:
+            video = pafy.new(url)
+            test=video.streams
+            playurl=test[0].url
+            return {'id': str(playurl)}
+        except:
+            return "Fail"
 
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Two, "/test/")
+api.add_resource(Three, "/test360/")
 if __name__ == "__main__":
     app.run(debug=True)
