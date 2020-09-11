@@ -35,7 +35,7 @@ class Three(Resource):
         try:
             video = pafy.new(url)
             test=video.streams
-            playurl=test[0].url
+            playurl=test[1].url
             return {'id': str(playurl)}
         except:
             return "Fail"
