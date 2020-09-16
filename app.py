@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,jsonify, request 
 from flask_restful import Api, Resource
 from youtubesearchpython import SearchVideos
 import json
@@ -18,6 +18,16 @@ class One(Resource):
             return json.loads(search.result())
         except:
             return "Fail"
+class Mid(Resource):
+
+    def post(self):      
+        data = request.get_json('data')
+        #data = request.json('data')
+        #data = request.args.get('data')     # status code 
+        print(data)
+        return jsonify(data)#json.loads({'data':"HELLAA"}) , 201 #jsonify({'data': 'HELLL'}), 201
+        print("HElla")
+
 
 class Two(Resource):
 
@@ -41,6 +51,7 @@ class Three(Resource):
             return "Fail"
 
 api.add_resource(One, "/api/<string:name>")
+api.add_resource(Mid, "/api2/")
 api.add_resource(Two, "/test/")
 api.add_resource(Three, "/test/360/")
 if __name__ == "__main__":
