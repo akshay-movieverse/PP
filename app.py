@@ -25,7 +25,8 @@ class Mid(Resource):
         #data = request.json('data')
         #data = request.args.get('data')     # status code 
         print(data)
-        return jsonify(data)#json.loads({'data':"HELLAA"}) , 201 #jsonify({'data': 'HELLL'}), 201
+        data={"ty":"cv"}
+        return jsonify(data)    #json.loads({'data':"HELLAA"}) , 201 #jsonify({'data': 'HELLL'}), 201
         print("HElla")
 
 
