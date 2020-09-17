@@ -24,11 +24,11 @@ class Mid(Resource):
     def post(self):      
         data = request.get_json('data')
         link=data['link']
-        print(link)
-        v = pafy.new(url)
+        #print(link)
+        v = pafy.new(link)
         for s in v.allstreams:
             if ('x360' in s.resolution):
-                print(s)
+                #print(s)
                 link_data['link_360']=s.url
             elif ('x480' in s.resolution):
                 link_data['link_480']=s.url
