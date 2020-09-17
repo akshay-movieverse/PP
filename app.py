@@ -9,6 +9,7 @@ url = "https://www.youtube.com/watch?v=SOjh073441g"
 app = Flask(__name__)
 api = Api(app)
 
+link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
 
 class One(Resource):
 
@@ -22,12 +23,28 @@ class Mid(Resource):
 
     def post(self):      
         data = request.get_json('data')
+        link=data['link']
+        v = pafy.new(link)
+        for s in v.allstreams:
+            if ('x360' in s.resolution):
+                link_data['link_360']=s.url
+            elif ('x480' in s.resolution):
+                link_data['link_480']=s.url
+            elif ('x720' in s.resolution):
+                link_data['link_720']=s.url
+            elif ('x1080' in s.resolution):
+                link_data['link_1080']=s.url
+            elif ('m4a' in s.extension):
+                link_data['link_m4a']=s.url
+            else:
+                pass
+
         #data = request.json('data')
         #data = request.args.get('data')     # status code 
-        print(data)
-        data={"ty":"cv"}
-        return jsonify(data)    #json.loads({'data':"HELLAA"}) , 201 #jsonify({'data': 'HELLL'}), 201
-        print("HElla")
+        #print(data)
+
+        return jsonify(link_data)    #json.loads({'data':"HELLAA"}) , 201 #jsonify({'data': 'HELLL'}), 201
+ 
 
 
 class Two(Resource):
