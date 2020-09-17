@@ -4,7 +4,7 @@ from youtubesearchpython import SearchVideos
 import json
 import pafy
 
-url = "https://www.youtube.com/watch?v=SOjh073441g"
+url = "https://www.youtube.com/watch?v=3jf_Z68c4LQ"
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,7 +24,8 @@ class Mid(Resource):
     def post(self):      
         data = request.get_json('data')
         link=data['link']
-        v = pafy.new(link)
+        print(link)
+        v = pafy.new(url)
         for s in v.allstreams:
             if ('x360' in s.resolution):
                 print(s)
