@@ -24,7 +24,7 @@ class Mid(Resource):
     def post(self):      
         data = request.get_json('data')
         link=data['link']
-        v = pafy.new(url)
+        v = pafy.new(link)
         for s in v.allstreams:
             if ('x360' in s.resolution):
                 print(s)
