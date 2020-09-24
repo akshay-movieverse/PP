@@ -14,7 +14,7 @@ video = YouTube(link)
 print(video.streams)
 print(video.streams[0].url)
 #print(video.extract.get_ytplayer_config)
-'''
+
 import pafy
 link='https://www.youtube.com/watch?v=aVpJGGQHSqc'
 url = "https://www.youtube.com/watch?v=bMt47wvK6u0"
@@ -28,4 +28,7 @@ best = video.getbest()
 print(best.url)
 #print(best[-6].url)
 '''
-'''
+from urllib.parse import unquote
+url = "https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdNJCW4n3Rik"
+z=unquote(url)
+print(z)

@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 import json
 import pafy
 
+
 url = "https://www.youtube.com/watch?v=pr-4GbR4DpQ"
 
 app = Flask(__name__)
@@ -118,13 +119,15 @@ class Three(Resource):
             return "Fail"
 
 class Four(Resource):
+    
 
     def get(self,name):
         try:
             #data = name
             #link=data['link']
             #print(link)
-            link=name
+
+            link="https://www.youtube.com/watch?"+name
             v = pafy.new(link)
             for s in v.allstreams:
                 if ('x360' in s.resolution):
