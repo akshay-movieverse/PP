@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app, resources={r"/api3": {"origins": "http://movieverse.unaux.com/"}})
+cors = CORS(app, resources={r"/api3": {"origins": "*"}})
 
 api = Api(app)
 
@@ -25,7 +25,7 @@ def helloWorld():
 link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
 
 @app.route('/api3', methods=['POST'])
-@cross_origin(origin='http://movieverse.unaux.com/')#,headers=['Content- Type','Authorization'])
+@cross_origin(origin='*')#,headers=['Content- Type','Authorization'])
 def foo():
     try:
         data = request.get_json('data')
@@ -117,8 +117,44 @@ class Three(Resource):
         except:
             return "Fail"
 
+class Four(Resource):
+
+    def get(self,name):
+        try:
+            #data = name
+            #link=data['link']
+            #print(link)
+            link=name
+            v = pafy.new(link)
+            for s in v.allstreams:
+                if ('x360' in s.resolution):
+                        #print(s)
+                    link_data['link_360']=s.url
+                elif ('x480' in s.resolution):
+                    link_data['link_480']=s.url
+                elif ('x720' in s.resolution):
+                    link_data['link_720']=s.url
+                elif ('x1080' in s.resolution):
+                    link_data['link_1080']=s.url
+                elif ('m4a' in s.extension):
+                    link_data['link_m4a']=s.url
+                else:
+                    pass
+
+                #data = request.json('data')
+                #data = request.args.get('data')     # status code 
+                #print(data)
+
+            return jsonify(link_data)    
+        #return "HELL"
+        except:
+            return "FAIL"
+
+
+
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Mid, "/api2/")
+api.add_resource(Four,'/api4/<string:name>')
 api.add_resource(Two, "/test/")
 api.add_resource(Three, "/test/360/")
 if __name__ == "__main__":
