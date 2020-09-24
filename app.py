@@ -21,6 +21,9 @@ api = Api(app)
 def helloWorld():
   return "Hello, cross-origin-world!"
 
+
+link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
+
 @app.route('/api3', methods=['POST'])
 @cross_origin(origin='http://movieverse.unaux.com/')#,headers=['Content- Type','Authorization'])
 def foo():
@@ -54,7 +57,6 @@ def foo():
         return "FAIL"
 
 
-link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
 
 class One(Resource):
 
