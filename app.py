@@ -21,10 +21,34 @@ api = Api(app)
 def helloWorld():
   return "Hello, cross-origin-world!"
 
-@app.route('/foo', methods=['POST'])
+@app.route('/api3/', methods=['POST'])
 @cross_origin(origin='http://movieverse.unaux.com/')#,headers=['Content- Type','Authorization'])
 def foo():
-    return "HELL"
+    data = request.get_json('data')
+    link=data['link']
+    #print(link)
+    v = pafy.new(link)
+    for s in v.allstreams:
+        if ('x360' in s.resolution):
+                #print(s)
+            link_data['link_360']=s.url
+        elif ('x480' in s.resolution):
+            link_data['link_480']=s.url
+        elif ('x720' in s.resolution):
+            link_data['link_720']=s.url
+        elif ('x1080' in s.resolution):
+            link_data['link_1080']=s.url
+        elif ('m4a' in s.extension):
+            link_data['link_m4a']=s.url
+        else:
+            pass
+
+        #data = request.json('data')
+        #data = request.args.get('data')     # status code 
+        #print(data)
+
+    return jsonify(link_data)    
+    #return "HELL"
 
 
 link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
