@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://movieverse.unaux.com/"}})
+cors = CORS(app, resources={r"/api3": {"origins": "http://movieverse.unaux.com/"}})
 
 api = Api(app)
 
@@ -21,11 +21,10 @@ api = Api(app)
 def helloWorld():
   return "Hello, cross-origin-world!"
 
-@app.route('/api3/', methods=['POST'])
+@app.route('/api3', methods=['POST'])
 @cross_origin(origin='http://movieverse.unaux.com/')#,headers=['Content- Type','Authorization'])
 def foo():
     try:
-            
         data = request.get_json('data')
         link=data['link']
         #print(link)
