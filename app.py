@@ -156,7 +156,7 @@ class Four(Resource):
 
 @app.route('/api5/<string:name>', methods=['GET'])     
 @cross_origin(origin='*')
-def get(self,name):
+def met(self,name):
     try:
         link="https://www.youtube.com/watch?v="+name
         v = pafy.new(link)
