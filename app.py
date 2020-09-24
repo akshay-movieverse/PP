@@ -120,7 +120,7 @@ class Three(Resource):
 
 class Four(Resource):
     
-
+    @cross_origin(origin='*')
     def get(self,name):
         try:
             #data = name
