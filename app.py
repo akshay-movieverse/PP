@@ -1,13 +1,26 @@
 from flask import Flask,jsonify, request 
 from flask_restful import Api, Resource
 from youtubesearchpython import SearchVideos
+from flask.ext.cors import CORS, cross_origin
 import json
 import pafy
 
 url = "https://www.youtube.com/watch?v=pr-4GbR4DpQ"
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+cors = CORS(app, resources={r"/foo": {"origins": "http://movieverse.unaux.com"}})
+
 api = Api(app)
+
+@app.route('/foo', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def foo():
+    return json.loads({'data':"HELLAA"})#request.json['inputVar']
+
 
 link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
 
