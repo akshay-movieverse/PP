@@ -127,7 +127,7 @@ class Four(Resource):
             #link=data['link']
             #print(link)
 
-            link="https://www.youtube.com/watch?"+name
+            link="https://www.youtube.com/watch?v="+name
             v = pafy.new(link)
             for s in v.allstreams:
                 if ('x360' in s.resolution):
