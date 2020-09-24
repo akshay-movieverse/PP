@@ -17,7 +17,7 @@ cors = CORS(app, resources={r"/foo": {"origins": "http://movieverse.unaux.com"}}
 api = Api(app)
 
 @app.route('/foo', methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+@cross_origin(origin='localhost')#,headers=['Content- Type','Authorization'])
 def foo():
     return json.loads({'data':"HELLAA"})#request.json['inputVar']
 
