@@ -22,7 +22,6 @@ def helloWorld():
   return "Hello, cross-origin-world!"
 
 @app.route('/foo', methods=['POST'])
-@cross_origin(origin='localhost')#,headers=['Content- Type','Authorization'])
 def foo():
     return "HELL"
 
