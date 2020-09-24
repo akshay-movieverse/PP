@@ -12,14 +12,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://movieverse.unaux.com"}})
+cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 
 api = Api(app)
 
 @app.route('/foo', methods=['POST'])
 @cross_origin(origin='localhost')#,headers=['Content- Type','Authorization'])
 def foo():
-    return request.json['inputVar']
+    return "HELL"
 
 
 link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
