@@ -154,6 +154,35 @@ class Four(Resource):
             return "FAIL"
 
 
+@app.route('/api5/<string:name>', methods=['GET'])     
+@cross_origin(origin='*')
+def get(self,name):
+    try:
+        link="https://www.youtube.com/watch?v="+name
+        v = pafy.new(link)
+        for s in v.allstreams:
+            if ('x360' in s.resolution):
+                link_data['link_360']=s.url
+            elif ('x480' in s.resolution):
+                link_data['link_480']=s.url
+            elif ('x720' in s.resolution):
+                link_data['link_720']=s.url
+            elif ('x1080' in s.resolution):
+                link_data['link_1080']=s.url
+            elif ('m4a' in s.extension):
+                link_data['link_m4a']=s.url
+            else:
+                pass
+
+                #data = request.json('data')
+                #data = request.args.get('data')     # status code 
+                #print(data)
+
+        return jsonify(link_data)    
+        #return "HELL"
+    except:
+        return "FAIL"
+
 
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Mid, "/api2/")
