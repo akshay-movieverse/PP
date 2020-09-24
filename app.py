@@ -19,7 +19,7 @@ api = Api(app)
 @app.route('/foo', methods=['POST'])
 @cross_origin(origin='localhost')#,headers=['Content- Type','Authorization'])
 def foo():
-    return json.loads({'data':"HELLAA"})#request.json['inputVar']
+    return request.json['inputVar']
 
 
 link_data={'link_360': 0 , 'link_480':0 ,   'link_720': 0, 'link_1080': 0 ,'link_m4a': 0}
