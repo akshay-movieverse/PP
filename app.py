@@ -155,8 +155,8 @@ class Four(Resource):
 
 
 @app.route('/api5/<string:name>', methods=['GET'])     
-#@cross_origin(origin='*')
-async def met(self,name):
+@cross_origin(origin='*')
+def met(name):
     try:
         link="https://www.youtube.com/watch?v="+name
         v = pafy.new(link)
@@ -178,7 +178,7 @@ async def met(self,name):
                 #data = request.args.get('data')     # status code 
                 #print(data)
 
-        return await jsonify(link_data)    
+        return jsonify(link_data)    
         #return "HELL"
     except:
         return "FAIL"
