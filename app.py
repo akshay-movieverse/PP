@@ -1,7 +1,7 @@
 from flask import Flask,jsonify, request 
 from flask_restful import Api, Resource
 from youtubesearchpython import SearchVideos
-from youtubesearchpython import SearchPlaylists
+from search_play import SearchPlaylists as sp
 from flask_cors import CORS, cross_origin
 import json
 import pafy
@@ -75,7 +75,7 @@ class Eleven(Resource):
 
     def get(self,name):
         try:
-            search = SearchPlaylists(name, offset = 1, mode = "json", max_results = 20)
+            search = sp(name, offset = 10, mode = "json", max_results = 20)
             return json.loads(search.result())
         except:
             return "Fail"
