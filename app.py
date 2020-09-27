@@ -1,6 +1,7 @@
 from flask import Flask,jsonify, request 
 from flask_restful import Api, Resource
 from youtubesearchpython import SearchVideos
+from youtubesearchpython import SearchPlaylists
 from flask_cors import CORS, cross_origin
 import json
 import pafy
@@ -67,6 +68,18 @@ class One(Resource):
             return json.loads(search.result())
         except:
             return "Fail"
+
+
+
+class Eleven(Resource):
+
+    def get(self,name):
+        try:
+            search = SearchPlaylists(name, offset = 1, mode = "json", max_results = 20)
+            return json.loads(search.result())
+        except:
+            return "Fail"
+
 class Mid(Resource):
 
     def post(self):      
@@ -154,7 +167,7 @@ class Four(Resource):
             return "FAIL"
 
 
-@app.route('/api5/<string:name>', methods=['GET'])     
+@app.route('/api5/<string:name>', methods=['GET'])
 @cross_origin(origin='*')
 def met(name):
     try:
@@ -184,7 +197,9 @@ def met(name):
         return "FAIL"
 
 
+
 api.add_resource(One, "/api/<string:name>")
+api.add_resource(Eleven, "/apiplay/<string:name>")
 api.add_resource(Mid, "/api2/")
 api.add_resource(Four,'/api4/<string:name>')
 api.add_resource(Two, "/test/")
