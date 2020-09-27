@@ -1,11 +1,11 @@
-'''
+
 import requests
 
 data={'data':'rrr'}
 r = requests.post("http://127.0.0.1:5000/api2/",json={'link':'https://www.youtube.com/watch?v=aVpJGGQHSqc'})
 #
 print(r.json())
-
+'''
 import pytube
 from pytube import YouTube
 
@@ -28,7 +28,3 @@ best = video.getbest()
 print(best.url)
 #print(best[-6].url)
 '''
-from urllib.parse import unquote
-url = "https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DdNJCW4n3Rik"
-z=unquote(url)
-print(z)
