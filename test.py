@@ -2,7 +2,7 @@
 import requests
 
 data={'data':'rrr'}
-r = requests.post("http://127.0.0.1:5000/api2/",json={'link':'https://www.youtube.com/watch?v=aVpJGGQHSqc'})
+r = requests.("http://127.0.0.1:5000/api2/",json={'link':'https://www.youtube.com/watch?v=aVpJGGQHSqc'})
 #
 print(r.json())
 '''

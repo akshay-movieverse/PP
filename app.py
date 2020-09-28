@@ -4,6 +4,7 @@ from youtubesearchpython import SearchVideos
 from search_play import SearchPlaylists as sp
 from flask_cors import CORS, cross_origin
 import json
+from json import JSONEncoder
 import pafy
 
 
@@ -75,7 +76,7 @@ class Eleven(Resource):
 
     def get(self,name):
         try:
-            search = sp(name, offset = 10, mode = "json", max_results = 20)
+            search = sp(name, offset = 1, mode = "json", max_results = 40)
             return json.loads(search.result())
         except:
             return "Fail"
@@ -170,32 +171,23 @@ class Four(Resource):
 @app.route('/api5/<string:name>', methods=['GET'])
 @cross_origin(origin='*')
 def met(name):
-    try:
-        link="https://www.youtube.com/watch?v="+name
-        v = pafy.new(link)
-        for s in v.allstreams:
-            if ('x360' in s.resolution):
-                link_data['link_360']=s.url
-            elif ('x480' in s.resolution):
-                link_data['link_480']=s.url
-            elif ('x720' in s.resolution):
-                link_data['link_720']=s.url
-            elif ('x1080' in s.resolution):
-                link_data['link_1080']=s.url
-            elif ('m4a' in s.extension):
-                link_data['link_m4a']=s.url
-            else:
-                pass
+    
+    link="https://www.youtube.com/playlist?list="+name
+    playlist = pafy.get_playlist(link) 
+    items = playlist["items"] 
+    i=0
+    result=[]
+    for index in items:
+        result_index = {
+        "index": i,
+        "meta":index['playlist_meta'], 
+        }
+        i=i+1
+        result+=[result_index]
 
-                #data = request.json('data')
-                #data = request.args.get('data')     # status code 
-                #print(data)
-
-        return jsonify(link_data)    
+    return jsonify(result)
         #return "HELL"
-    except:
-        return "FAIL"
-
+    
 
 
 api.add_resource(One, "/api/<string:name>")
