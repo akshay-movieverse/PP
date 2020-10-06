@@ -2,6 +2,7 @@ from flask import Flask,jsonify, request
 from flask_restful import Api, Resource
 from youtubesearchpython import SearchVideos
 from search_play import SearchPlaylists as sp
+from home_search import Home
 from flask_cors import CORS, cross_origin
 import json
 from json import JSONEncoder
@@ -80,6 +81,17 @@ class Eleven(Resource):
             return json.loads(search.result())
         except:
             return "Fail"
+
+
+class Twelve(Resource):
+
+    def get(self):
+        try:
+            search = Home()
+            return json.loads(search.result())
+        except:
+            return "Fail"
+
 
 class Mid(Resource):
 
@@ -192,6 +204,7 @@ def met(name):
 
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Eleven, "/apiplay/<string:name>")
+api.add_resource(Twelve, "/apihome/")
 api.add_resource(Mid, "/api2/")
 api.add_resource(Four,'/api4/<string:name>')
 api.add_resource(Two, "/test/")
