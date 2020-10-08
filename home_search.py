@@ -34,7 +34,7 @@ class ScriptHandler:
         self.thumbnails = []
         self.time = []
         self.channel = []
-
+        self.pubdate = []
         self.pageSource = self.page.split('":"')
 
         for index in range(0, len(self.pageSource) - 1, 1):
@@ -60,12 +60,15 @@ class ScriptHandler:
             if self.pageSource[index][-32:] =='"longBylineText":{"runs":[{"text':                       # Channel name
                 self.channel.append(self.pageSource[index+1].split('"')[0])
 
+            if self.pageSource[index][-33:] == '"shortViewCountText":{"simpleText':
+                self.views.append(self.pageSource[index+1].split('"')[0])
 
             if self.pageSource[index][-32:] == '"publishedTimeText":{"simpleText':                      # published time and views
                 if self.pageSource[index+1][-44:] == '"accessibility":{"accessibilityData":{"label':
                     if self.pageSource[index+3][-28:] == '"viewCountText":{"simpleText':
+                        self.pubdate.append(self.pageSource[index+1].split('"')[0])
                         self.time.append(self.pageSource[index+3].split('"')[0])
-                        self.views.append(self.pageSource[index+4].split('"')[0])
+
 
         self.max_results = len(self.views)
         if len(self.ids) > self.max_results: #and len(self.thumbnails) > self.max_results:
@@ -76,7 +79,7 @@ class ScriptHandler:
             self.thumbnails = self.thumbnails[0:max_results]
             self.time = self.time[0:max_results]
             self.channel = self.channel[0:max_results]
-
+            self.pubdate = self.pubdate[0:max_results]
 
 import json
 
@@ -141,7 +144,7 @@ class Home(RequestHandler, ScriptHandler):
                         "thumbnails": self.thumbnails[index],
                         "time": self.time[index],
                         "channel": self.channel[index],
-
+                        "pubdate" : self.pubdate[index]
 
                     }
                     result+=[result_index]
@@ -162,7 +165,10 @@ class Home(RequestHandler, ScriptHandler):
                         self.thumbnails[index],
                         self.time[index],
                         self.channel[index],
+                        self.pubdate[index]
                     ]
                     result+=[list_index]
                 
                 return result
+
+
