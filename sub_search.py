@@ -38,9 +38,14 @@ class ScriptHandler:
         self.chthumbnails = []
         self.desc = []
         self.pubdate = []
+        self.sviews = []
         self.pageSource = self.page.split('":"')
 
         for index in range(0, len(self.pageSource) - 1, 1):
+
+
+            if self.pageSource[index][-51:]  == '"videoPrimaryInfoRenderer":{"title":{"runs":[{"text':
+                self.sviews.append(self.pageSource[index+2].split('"')[0])
 
             self.chthumb=[]
             if self.pageSource[index][-93:]  == '"videoSecondaryInfoRenderer":{"owner":{"videoOwnerRenderer":{"thumbnail":{"thumbnails":[{"url':
@@ -186,9 +191,9 @@ class Sub(RequestHandler, ScriptHandler):
                     result+=[result_index]
 
                 if self.mode == "json":
-                    return json.dumps({"search_result": result, 'meta': {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate} }, indent=4)
+                    return json.dumps({"search_result": result, 'meta': {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate, 'sviews': self.sviews} }, indent=4)
                 else:
-                    return {"search_result": result, 'meta': {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate}}
+                    return {"search_result": result, 'meta': {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate, 'sviews': self.sviews}}
             
             elif self.mode == "list":
                 
@@ -205,4 +210,4 @@ class Sub(RequestHandler, ScriptHandler):
                     ]
                     result+=[list_index]
                 
-                return result , {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate}
+                return result , {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate,'sviews': self.sviews}
