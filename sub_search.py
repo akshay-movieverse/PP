@@ -53,7 +53,8 @@ class ScriptHandler:
                 self.chthumbnails.append(self.chthumb)
                 self.chthumb = []
 
-
+            if self.pageSource[index][-25:]  == '},"dateText":{"simpleText':
+                self.pubdate.append(self.pageSource[index+1].split('"')[0])
 
             ''' Setting Playlist ID and link. '''
             if self.pageSource[index][-32:] =='"compactVideoRenderer":{"videoId':                                       # Video Id
@@ -97,8 +98,6 @@ class ScriptHandler:
                 while self.pageSource[temp][-17:] != '},"trackingParams':
                     if self.pageSource[temp][-26:] == '"description":{"simpleText':
                         self.desc.append(self.pageSource[temp+1].split('"}')[0])
-                    if self.pageSource[temp][-12:] == '"publishDate':
-                        self.pubdate.append(self.pageSource[temp+1].split('"')[0])
                     temp=temp+1
 
                 #print(self.pageSource[index+3])
