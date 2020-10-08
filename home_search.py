@@ -11,7 +11,7 @@ import io
 class RequestHandler:
     def request(self):
         try:
-            request = "https://www.youtube.com"
+            request = "https://www.youtube.in"
             response = urlopen(request).read()
             self.page = response.decode('utf_8')
 
