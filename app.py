@@ -106,7 +106,7 @@ class Seventeen(Resource):
 
 
 class Thirteen(Resource):
-
+    @cross_origin(origin='*')
     def get(self,name):
         try:
             search = Sub(name)
