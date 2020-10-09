@@ -221,7 +221,12 @@ def met(name):
 
     return jsonify(result)
         #return "HELL"
-    
+
+@app.route('/api77/<string:name>', methods=['GET'])
+@cross_origin(origin='*')
+def meet(name):
+    search = Sub(name)
+    return json.loads(search.result())
 
 
 api.add_resource(One, "/api/<string:name>")
