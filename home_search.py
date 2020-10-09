@@ -21,10 +21,7 @@ class RequestHandler:
         except: 
             self.networkError = True
 
-        self.pageSource = self.page.split('":"')
-        print("help")
-        with io.open("v.txt","w",encoding="utf-8") as f:
-            f.write(str(self.pageSource))
+
 
 class ScriptHandler:
     def scriptResponseHandler(self):     
