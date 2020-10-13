@@ -10,8 +10,12 @@ import json
 from json import JSONEncoder
 import pafy
 
-
-url = "https://www.youtube.com/watch?v=pr-4GbR4DpQ"
+import urllib.parse
+#query = {'client': {'hl': 'en', 'gl': 'US', 'visitorData': 'CgtlaGZ2TThzZGc3cyiztpX8BQ%3D%3D', 'userAgent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/84.0.4147.89 Safari/537.36,gzip(gfe)', 'clientName': 'WEB', 'clientVersion': '2.20201008.04.01', 'osName': 'X11', 'osVersion': '0', 'browserName': 'HeadlessChrome', 'browserVersion': '84.0.4147.89', 'screenWidthPoints': 800, 'screenHeightPoints': 600, 'screenPixelDensity': 1, 'screenDensityFloat': 1, 'utcOffsetMinutes': -240, 'userInterfaceTheme': 'USER_INTERFACE_THEME_LIGHT', 'connectionType': 'CONN_CELLULAR_4G'}, 'request': {'sessionId': '6883007880370077786', 'internalExperimentFlags': [], 'consistencyTokenJars': []}, 'adSignalsInfo': {'consentBumpParams': {'consentHostnameOverride': 'https://www.youtube.com', 'urlOverride': ''}}, 'user': {}, 'clientScreenNonce': 'MC40NDIxNjYyNzczNjYxMTk3', 'clickTracking': {'clickTrackingParams': 'CBwQ8eIEIhMIxOf41omx7AIVS7icCh1q0gqI'}}
+##v=urllib.parse.quote(query)
+#print(v)
+#meta={"adSignalsInfo":{"consentBumpParams":{"consentHostnameOverride":"https://www.youtube.com","urlOverride":""}},"clickTracking":{"clickTrackingParams":"CBwQ8eIEIhMImMzPgZqx7AIVwu1gCh0TngW2"},"client":{"browserName":"HeadlessChrome","browserVersion":"84.0.4147.89","clientName":"WEB","clientVersion":"2.20201008.04.01","connectionType":"CONN_CELLULAR_4G","gl":"US","hl":"en","osName":"X11","osVersion":"0","screenDensityFloat":1,"screenHeightPoints":600,"screenPixelDensity":1,"screenWidthPoints":800,"userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/84.0.4147.89 Safari/537.36,gzip(gfe)","userInterfaceTheme":"USER_INTERFACE_THEME_LIGHT","utcOffsetMinutes":-240,"visitorData":"CgtMWXRyY3NwSHRmWSjT2JX8BQ%3D%3D"},"clientScreenNonce":"MC45OTM5ODI5NTA1ODQ1OTU2","request":{"consistencyTokenJars":[],"internalExperimentFlags":[],"sessionId":"6883026709901351894"},"user":{}}
+#url = "https://www.youtube.com/watch?v=pr-4GbR4DpQ"
 
 app = Flask(__name__)
 
@@ -94,16 +98,25 @@ class Twelve(Resource):
         except:
             return "Fail"
 
-
+from urllib.parse import unquote
 class Seventeen(Resource):
     @cross_origin(origin='*')
-    def get(self):
+    def get(self,name):
         try:
-            search = hm.result()
+            print(unquote(name))
+            search = hm().result(name)
             return json.loads(search)
         except:
             return "Fail"
 
+
+class Eighteen(Resource):
+    @cross_origin(origin='*')
+    def get(self,name):
+        try:
+            return name
+        except:
+            return "Fail"
 
 class Thirteen(Resource):
     @cross_origin(origin='*')
@@ -232,7 +245,8 @@ def meet(name):
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Eleven, "/apiplay/<string:name>")
 api.add_resource(Twelve, "/apihome/")
-api.add_resource(Seventeen, "/apihomestar/")
+api.add_resource(Seventeen, "/apihomestar/<string:name>")
+api.add_resource(Seventeen, "/apitest/<string:name>")
 api.add_resource(Thirteen, "/apisub/<string:name>")
 api.add_resource(Mid, "/api2/")
 api.add_resource(Four,'/api4/<string:name>')

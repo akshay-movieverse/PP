@@ -28,11 +28,12 @@ pdescription = []
 pviews = []
 ptime = []
 s=requests.Session()
-def scrape(token):
+def scrape(token,meta):
     x=0
+    meta ={"adSignalsInfo":{"consentBumpParams":{"consentHostnameOverride":"https://www.youtube.com","urlOverride":""}},"clickTracking":{"clickTrackingParams":"CBwQ8eIEIhMImMzPgZqx7AIVwu1gCh0TngW2"},"client":{"browserName":"HeadlessChrome","browserVersion":"84.0.4147.89","clientName":"WEB","clientVersion":"2.20201008.04.01","connectionType":"CONN_CELLULAR_4G","gl":"US","hl":"en","osName":"X11","osVersion":"0","screenDensityFloat":1,"screenHeightPoints":600,"screenPixelDensity":1,"screenWidthPoints":800,"userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/84.0.4147.89 Safari/537.36,gzip(gfe)","userInterfaceTheme":"USER_INTERFACE_THEME_LIGHT","utcOffsetMinutes":-240,"visitorData":"CgtMWXRyY3NwSHRmWSjT2JX8BQ%3D%3D"},"clientScreenNonce":"MC45OTM5ODI5NTA1ODQ1OTU2","request":{"consistencyTokenJars":[],"internalExperimentFlags":[],"sessionId":"6883026709901351894"},"user":{}}
     while x<15:
         
-        data = {"context":{"client":{"hl":"en","gl":"IN","deviceMake":"Microsoft","deviceModel":"Edge","visitorData":"CgtCdURrdDlfbExuQSi414D8BQ%3D%3D","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36 Edg/85.0.564.70,gzip(gfe)","clientName":"WEB","clientVersion":"2.20201006.05.00","osName":"Windows","osVersion":"10.0","browserName":"Edge Chromium","browserVersion":"85.0.564.70","screenWidthPoints":982,"screenHeightPoints":754,"screenPixelDensity":1,"screenDensityFloat":1.25,"utcOffsetMinutes":330,"userInterfaceTheme":"USER_INTERFACE_THEME_DARK","connectionType":"CONN_CELLULAR_4G"},"request":{"sessionId":"6881546324221994211","internalExperimentFlags":[],"consistencyTokenJars":[]},"adSignalsInfo":{"consentBumpParams":{"consentHostnameOverride":"https://www.youtube.com","urlOverride":""}},"user":{},"clientScreenNonce":"MC42MjAxNjMyNzU5MjM2OTE1","clickTracking":{"clickTrackingParams":"CBwQ8eIEIhMImPLu2Jen7AIVlPE4Bh3MogAI"}},"continuation":token}
+        data = {"context":meta,"continuation":token}
         
         r = s.post("https://www.youtube.com/youtubei/v1/browse?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8", json=data,headers=headers)
 
@@ -144,8 +145,8 @@ def scrape(token):
 
 
 
-def result():
-    scrape(token)
+def result(meta):
+    scrape(token,meta)
     result = []
     presult=[]
     for index in range(len(ids)):
