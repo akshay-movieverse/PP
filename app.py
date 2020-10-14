@@ -101,19 +101,20 @@ class Twelve(Resource):
 from urllib.parse import unquote
 class Seventeen(Resource):
     @cross_origin(origin='*')
-    def get(self,name):
-        try:
-            print(unquote(name))
-            search = hm().result(name)
-            return json.loads(search)
-        except:
-            return "Fail"
+    def get(self,visitdata,token):
+        
+            #print(unquote(name))
+        search = hm.result(visitdata,token)
+        return json.loads(search)
+        #except:
+        #    return "Fail"
 
 
 class Eighteen(Resource):
     @cross_origin(origin='*')
-    def get(self,name):
+    def post(self,name):
         try:
+            data = request.get_json('data')
             return name
         except:
             return "Fail"
@@ -245,8 +246,8 @@ def meet(name):
 api.add_resource(One, "/api/<string:name>")
 api.add_resource(Eleven, "/apiplay/<string:name>")
 api.add_resource(Twelve, "/apihome/")
-api.add_resource(Seventeen, "/apihomestar/<string:name>")
-api.add_resource(Seventeen, "/apitest/<string:name>")
+api.add_resource(Seventeen, "/apihomestar/<string:visitdata>/<string:token>")
+api.add_resource(Eighteen, "/apitest/<string:name>")
 api.add_resource(Thirteen, "/apisub/<string:name>")
 api.add_resource(Mid, "/api2/")
 api.add_resource(Four,'/api4/<string:name>')
