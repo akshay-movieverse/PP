@@ -2,8 +2,8 @@ import requests
 import io
 import json
 headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
-token = "4qmFsgLhAxIPRkV3aGF0X3RvX3dhdGNoGpIDQ0dCNnBnSkRhVGhCUVVkV2RVRkJSa3BVWjBGQ1UxVTBRVUZSUWtkU1dHUnZXVmhTWm1SSE9XWmtNa1l3V1RKblFVRlJRVUZCVVVWQ1FVRkJRVUZSUVVKQlFVRkNRVkpDU1VkTGFVYzBabUl0Y0U5M1EwMW5iMGxwVGpOaU5UazJkalZLUldoVGFXOUxTVkZ2Wm1KNlpEQk5lVEZOVlVVMGVtTlZiRlppTUVaV1ZraFdUVTVHVmtST01FWnlWRVV4TlZFeFZrTlplR2xCY21OWVFqQkROV0ZhWjNCclEyaENOV1JHT1hkWlYyUnNXRE5PZFZsWVFucGhSemt3UldnNWRrNHpVWHBNVlhoUlZHcE9lRk5XVm5aUlZsWlZaRlYzTUZaVlRUTlJWM1JOVkZoc1JGWlZTbXBIYVRoQlFVZFdkVUZCUmtwVVowRkNVMVUwUVVGUlFrZFNXR1J2V1ZoU1ptUkhPV1prTWtZd1dUSm5RVUZSUVVGQlVVVkNRVUZCUVVGUlFVSkJRVUZDUVZFJTNEkgIbGhdodHRwczovL3d3dy55b3V0dWJlLmNvbSIAmgIaYnJvd3NlLWZlZWRGRXdoYXRfdG9fd2F0Y2g%3D"
-token = "4qmFsgLhAxIPRkV3aGF0X3RvX3dhdGNoGpIDQ0JoNnBnSkRhVGhCUVVkV2RVRkJSbFpWZDBGQ1ZsWk5RVUZSUWtkU1dHUnZXVmhTWm1SSE9XWmtNa1l3V1RKblFVRlJRVUZCVVVWQ1FVRkJRVUZSUVVKQlFVRkNRVkpCUVVkUGJuWndOMlZ6Y3kxM1EwMW5iMGswWVVkek9IWnViVzVtWkRaVGFXOUxTVkZ2Wms1RVRrdGFTRWw0V0RGa1lXSkZSbTFPUlZacFkwWmtORTR5UmsxVFJWbDBUVzF3UzFkc1ZtOVplR3AyWjNRdGN6QnBOV0ZhWjNCclEyaENOV1JHT1hkWlYyUnNXRE5PZFZsWVFucGhSemt3UldnNE1FMHdjR3RqYWtabVZqRndjMUZYV1RCU1YwcDNWak5uTTFsVmVFbFNhVEI1WVd0d1lWWlhhR3BIYVRoQlFVZFdkVUZCUmxaVmQwRkNWbFpOUVVGUlFrZFNXR1J2V1ZoU1ptUkhPV1prTWtZd1dUSm5RVUZSUVVGQlVVVkNRVUZCUVVGUlFVSkJRVUZDUVZFJTNEkgIbGhdodHRwczovL3d3dy55b3V0dWJlLmNvbSIAmgIaYnJvd3NlLWZlZWRGRXdoYXRfdG9fd2F0Y2g%3D"
+#token = "4qmFsgLhAxIPRkV3aGF0X3RvX3dhdGNoGpIDQ0dCNnBnSkRhVGhCUVVkV2RVRkJSa3BVWjBGQ1UxVTBRVUZSUWtkU1dHUnZXVmhTWm1SSE9XWmtNa1l3V1RKblFVRlJRVUZCVVVWQ1FVRkJRVUZSUVVKQlFVRkNRVkpDU1VkTGFVYzBabUl0Y0U5M1EwMW5iMGxwVGpOaU5UazJkalZLUldoVGFXOUxTVkZ2Wm1KNlpEQk5lVEZOVlVVMGVtTlZiRlppTUVaV1ZraFdUVTVHVmtST01FWnlWRVV4TlZFeFZrTlplR2xCY21OWVFqQkROV0ZhWjNCclEyaENOV1JHT1hkWlYyUnNXRE5PZFZsWVFucGhSemt3UldnNWRrNHpVWHBNVlhoUlZHcE9lRk5XVm5aUlZsWlZaRlYzTUZaVlRUTlJWM1JOVkZoc1JGWlZTbXBIYVRoQlFVZFdkVUZCUmtwVVowRkNVMVUwUVVGUlFrZFNXR1J2V1ZoU1ptUkhPV1prTWtZd1dUSm5RVUZSUVVGQlVVVkNRVUZCUVVGUlFVSkJRVUZDUVZFJTNEkgIbGhdodHRwczovL3d3dy55b3V0dWJlLmNvbSIAmgIaYnJvd3NlLWZlZWRGRXdoYXRfdG9fd2F0Y2g%3D"
+#token = "4qmFsgLhAxIPRkV3aGF0X3RvX3dhdGNoGpIDQ0JoNnBnSkRhVGhCUVVkV2RVRkJSbFpWZDBGQ1ZsWk5RVUZSUWtkU1dHUnZXVmhTWm1SSE9XWmtNa1l3V1RKblFVRlJRVUZCVVVWQ1FVRkJRVUZSUVVKQlFVRkNRVkpCUVVkUGJuWndOMlZ6Y3kxM1EwMW5iMGswWVVkek9IWnViVzVtWkRaVGFXOUxTVkZ2Wms1RVRrdGFTRWw0V0RGa1lXSkZSbTFPUlZacFkwWmtORTR5UmsxVFJWbDBUVzF3UzFkc1ZtOVplR3AyWjNRdGN6QnBOV0ZhWjNCclEyaENOV1JHT1hkWlYyUnNXRE5PZFZsWVFucGhSemt3UldnNE1FMHdjR3RqYWtabVZqRndjMUZYV1RCU1YwcDNWak5uTTFsVmVFbFNhVEI1WVd0d1lWWlhhR3BIYVRoQlFVZFdkVUZCUmxaVmQwRkNWbFpOUVVGUlFrZFNXR1J2V1ZoU1ptUkhPV1prTWtZd1dUSm5RVUZSUVVGQlVVVkNRVUZCUVVGUlFVSkJRVUZDUVZFJTNEkgIbGhdodHRwczovL3d3dy55b3V0dWJlLmNvbSIAmgIaYnJvd3NlLWZlZWRGRXdoYXRfdG9fd2F0Y2g%3D"
 views = []
 ids = []
 titles = []
@@ -53,7 +53,10 @@ def scrape(visitdata,token):
                             thumbnails.append(l["thumbnail"]["thumbnails"])
                             description.append(l["descriptionSnippet"]["runs"][0]['text'])
                             channel.append(l["longBylineText"]["runs"][0]['text'])
-                            chimage.append(l["channelThumbnailSupportedRenderers"]["channelThumbnailWithLinkRenderer"]["thumbnail"]["thumbnails"])
+                            if "channelThumbnailSupportedRenderers" in l.keys():
+                                chimage.append(l["channelThumbnailSupportedRenderers"]["channelThumbnailWithLinkRenderer"]["thumbnail"]["thumbnails"])
+                            else:
+                                chimage.append("Null")
                             if "publishedTimeText" in l.keys():
                                 pubdate.append(l["publishedTimeText"]["simpleText"])
                             else :
