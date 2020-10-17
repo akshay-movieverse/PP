@@ -76,13 +76,23 @@ def scrape(visitdata,token):
                                 richthumb.append("Null")
                                 #print("No")
 
-                        else:
+                        elif "upcomingEventData" not in l.keys():
                             ids.append(l["videoId"])
                             titles.append(l["title"]["runs"][0]["text"])
                             thumbnails.append(l["thumbnail"]["thumbnails"])
                             channel.append(l["longBylineText"]["runs"][0]['text'])
                             chimage.append(l["channelThumbnailSupportedRenderers"]["channelThumbnailWithLinkRenderer"]["thumbnail"]["thumbnails"])
-                            views.append(l["shortViewCountText"]["simpleText"])
+                            
+                            if "shortViewCountText" in l.keys():
+                                v=l['shortViewCountText']
+                                if "simpleText" in v.keys():
+                                    views.append(l["shortViewCountText"]["simpleText"])
+                                else:
+                                    views.append("Null")
+                                    print(l)
+                                    break
+                            else:
+                                views.append("Null")
 
                             if 'descriptionSnippet' in l.keys():
                                 description.append(l["descriptionSnippet"]["runs"][0]['text'])
