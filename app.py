@@ -122,12 +122,8 @@ class Eighteen(Resource):
 class Thirteen(Resource):
     @cross_origin(origin='*')
     def get(self,name):
-        try:
-            search = Sub(name)
-            return json.loads(search.result())
-        except:
-            return "Fail"
-
+        search = Sub(name)
+        return json.loads(search.result())
 
 class Mid(Resource):
 
