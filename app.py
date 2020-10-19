@@ -123,7 +123,7 @@ class Thirteen(Resource):
     @cross_origin(origin='*')
     def get(self,name):
         search = Sub(name)
-        return json.loads(search.result())
+        return json.dumps(search.result())
 
 class Mid(Resource):
 
