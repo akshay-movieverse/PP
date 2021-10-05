@@ -49,13 +49,13 @@ class ScriptHandler:
                     else:
                         self.ids+=[self.pageSource[index+1].split('"')[0]]
                         self.links+=["https://www.youtube.com/playlist?list=" + self.pageSource[index+1].split('"')[0]]
-
+ 
             ''' Setting Playlist Title. '''
 
             if self.pageSource[index][-20:] == '"title":{"simpleText' and self.pageSource[index+1][-3:] == 'url':
                 self.titles+=[self.pageSource[index+1].split('"},"')[0].replace("\\u0026", "&")]
 
-                        
+
             self.thumb=[]
             if self.pageSource[index][-34:] == '"thumbnails":[{"thumbnails":[{"url':
                 temp=index
@@ -108,7 +108,7 @@ class SearchPlaylists(RequestHandler, ScriptHandler):
     networkError = False
     validResponse = False
 
-    def __init__(self, keyword, offset = 1, mode = "json", max_results = 20):
+    def __init__(self, keyword, offset = 1, mode = "list", max_results = 20):
 
         self.offset = offset
         self.mode = mode
@@ -175,3 +175,5 @@ class SearchPlaylists(RequestHandler, ScriptHandler):
                     result+=[list_index]
                 
                 return result
+
+

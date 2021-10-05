@@ -40,7 +40,7 @@ class ScriptHandler:
             if self.pageSource[index][-25:] =='"videoRenderer":{"videoId':                                       # Video Id
                 self.ids.append(self.pageSource[index+1].split('"')[0])
                 self.thumb=[]
-                #print(self.pageSource[index+1].split('"')[0])
+                print(self.pageSource[index+1].split('"')[0])
                 if self.pageSource[index+1][-19:] =='"thumbnails":[{"url':                           # Thumbnails 2
                     if 'https://i.ytimg.com' in self.pageSource[index+2].split('"')[0]:
                         self.thumb.append(self.pageSource[index+2].split('"')[0])
@@ -68,6 +68,7 @@ class ScriptHandler:
 
 
         self.max_results = len(self.views)
+        print(self.views)
         if len(self.ids) > self.max_results: #and len(self.thumbnails) > self.max_results:
             max_results = len(self.views)
             self.titles = self.titles[0:max_results]

@@ -41,6 +41,7 @@ class ScriptHandler:
 
             if self.pageSource[index][-51:]  == '"videoPrimaryInfoRenderer":{"title":{"runs":[{"text':
                 self.sviews.append(self.pageSource[index+2].split('"')[0])
+                
 
             self.chthumb=[]
             if self.pageSource[index][-93:]  == '"videoSecondaryInfoRenderer":{"owner":{"videoOwnerRenderer":{"thumbnail":{"thumbnails":[{"url':
@@ -55,6 +56,7 @@ class ScriptHandler:
 
             if self.pageSource[index][-25:]  == '},"dateText":{"simpleText':
                 self.pubdate.append(self.pageSource[index+1].split('"')[0])
+                
 
             ''' Setting Playlist ID and link. '''
             if self.pageSource[index][-32:] =='"compactVideoRenderer":{"videoId':                                       # Video Id
@@ -88,23 +90,25 @@ class ScriptHandler:
                         #print(self.pageSource[index+1].split('"')[0])
                         self.time.append(self.pageSource[index+4].split('"')[0])
                         #print(self.pageSource[index+4].split('"')[0])
-                        #self.views.append(self.pageSource[index+4].split('"')[0])
+                        self.views.append(self.pageSource[index+4].split('"')[0])
             if self.pageSource[index][-33:] == '"shortViewCountText":{"simpleText':
                 if self.pageSource[index+1].split('"')[0] not in self.views:
                     self.views.append(self.pageSource[index+1].split('"')[0])
                     #print(self.pageSource[index+1].split('"')[0]) 
             if  self.pageSource[index][-76:] == '"microformat":{"playerMicroformatRenderer":{"thumbnail":{"thumbnails":[{"url':
                 temp=index
+
                 while self.pageSource[temp][-17:] != '},"trackingParams':
                     if self.pageSource[temp][-26:] == '"description":{"simpleText':
                         self.desc.append(self.pageSource[temp+1].split('"}')[0])
                     temp=temp+1
 
-                #print(self.pageSource[index+3])
+ 
 
 
 
         self.max_results = len(self.views)
+        
         if len(self.titles) > self.max_results: #and len(self.thumbnails) > self.max_results:
             max_results = len(self.views)
             self.titles = self.titles[0:max_results]
@@ -114,6 +118,7 @@ class ScriptHandler:
             self.time = self.time[0:max_results]
             self.channel = self.channel[0:max_results]
             self.pubtime = self.pubtime[0:max_results]
+
 
 
 import json
@@ -206,3 +211,4 @@ class Sub(RequestHandler, ScriptHandler):
                     result+=[list_index]
                 
                 return result , {'channel' :self.chthumbnails, 'description': self.desc , 'publishDate':self.pubdate,'sviews': self.sviews}
+
