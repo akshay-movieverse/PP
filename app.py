@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 import json
 from json import JSONEncoder
 import pafy
+from sub import PlaylistYt
 
 import urllib.parse
 #query = {'client': {'hl': 'en', 'gl': 'US', 'visitorData': 'CgtlaGZ2TThzZGc3cyiztpX8BQ%3D%3D', 'userAgent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/84.0.4147.89 Safari/537.36,gzip(gfe)', 'clientName': 'WEB', 'clientVersion': '2.20201008.04.01', 'osName': 'X11', 'osVersion': '0', 'browserName': 'HeadlessChrome', 'browserVersion': '84.0.4147.89', 'screenWidthPoints': 800, 'screenHeightPoints': 600, 'screenPixelDensity': 1, 'screenDensityFloat': 1, 'utcOffsetMinutes': -240, 'userInterfaceTheme': 'USER_INTERFACE_THEME_LIGHT', 'connectionType': 'CONN_CELLULAR_4G'}, 'request': {'sessionId': '6883007880370077786', 'internalExperimentFlags': [], 'consistencyTokenJars': []}, 'adSignalsInfo': {'consentBumpParams': {'consentHostnameOverride': 'https://www.youtube.com', 'urlOverride': ''}}, 'user': {}, 'clientScreenNonce': 'MC40NDIxNjYyNzczNjYxMTk3', 'clickTracking': {'clickTrackingParams': 'CBwQ8eIEIhMIxOf41omx7AIVS7icCh1q0gqI'}}
@@ -123,7 +124,14 @@ class Thirteen(Resource):
     @cross_origin(origin='*')
     def get(self,name):
         search = Sub(name)
-        return json.loads(search.result())
+        return json.dumps(search.result())
+
+
+class Seventy(Resource):
+    @cross_origin(origin='*')
+    def get(self,name):
+        search = PlaylistYt(name)
+        return json.dumps(search.get_result())
 
 class Mid(Resource):
 
@@ -245,6 +253,7 @@ api.add_resource(Twelve, "/apihome/")
 api.add_resource(Seventeen, "/apihomestar/<string:visitdata>/<string:token>")
 api.add_resource(Eighteen, "/apitest/<string:name>")
 api.add_resource(Thirteen, "/apisub/<string:name>")
+api.add_resource(Seventy,"/playlistsub/<string:name>")
 api.add_resource(Mid, "/api2/")
 api.add_resource(Four,'/api4/<string:name>')
 api.add_resource(Two, "/test/")
