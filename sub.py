@@ -8,5 +8,7 @@ class PlaylistYt():
         self.key = keyword
     
     def get_result(self):
-        playlist = Playlist.get('https://www.youtube.com/playlist?list='+ self.key, mode = ResultMode.json)
+        playlist = Playlist.get('https://www.youtube.com/playlist?list='+self.key, mode = ResultMode.json)
         return json.loads(playlist)
+
+
